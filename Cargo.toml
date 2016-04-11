@@ -1,0 +1,14 @@
+[package]
+name = "playpen"
+version = "0.1.0"
+authors = ["Ticki <Ticki@users.noreply.github.com>"]
+
+[dependencies]
+hyper = "0.8.0"
+serde = "0.7.0"
+serde_json = "0.7.0"
+serde_macros = "0.7.2"
+
+[dependencies.url]
+git = "https://github.com/servo/rust-url"
+features = ["query_encoding"]
