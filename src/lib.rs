@@ -10,10 +10,30 @@ use hyper::{Client, header};
 
 use serde::ser::{self, Serialize};
 
+use std::{error, fmt};
+
 #[derive(Debug)]
 pub enum Error {
     Hyper(hyper::Error),
     Json(json::Error)
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        match self {
+            &Error::Hyper(ref e) => write!(f, "Hyper: {}", e),
+            &Error::Json(ref e) => write!(f, "JSON: {}", e),
+        }
+    }
+}
+
+impl error::Error for Error {
+    fn description(&self) -> &str {
+        match self {
+            &Error::Hyper(ref e) => e.description(),
+            &Error::Json(ref e) => e.description(),
+        }
+    }
 }
 
 impl From<hyper::Error> for Error {
