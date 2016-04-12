@@ -137,5 +137,22 @@ mod tests {
     #[test]
     fn test_succ() {
         assert_eq!(&eval("fn main() { println!(\"yoyoyo\") }").unwrap().output.unwrap(), "yoyoyo\n");
+        assert_eq!(&eval(Request {
+            code: "fn main() {}",
+            optimize: Optimize::O3,
+            version: Channel::Stable,
+            .. Default::default()
+        }).unwrap().rustc, "");
+    }
+
+    #[test]
+    fn test_err() {
+        assert!(eval("fn main() { p/rintln!(\"yoyoyo\") }").unwrap().rustc.len() > 50);
+        assert!(eval(Request {
+            code: "fn main() {!}",
+            optimize: Optimize::O3,
+            version: Channel::Stable,
+            .. Default::default()
+        }).unwrap().rustc.len() > 50);
     }
 }
