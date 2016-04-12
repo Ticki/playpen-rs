@@ -145,7 +145,7 @@ pub fn eval<'a, R: Into<Request<'a>>>(req: R) -> Result<Response, Error> {
     let req = req.into();
 
     Ok(try!(json::from_reader(try!(client.post("https://play.rust-lang.org/evaluate.json")
-        .header(header::Connection::keep_alive())
+        .header(header::Connection::close())
         .header(header::ContentType::json())
         .body(&try!(json::to_string(&req))).send()))))
 }
