@@ -4,10 +4,10 @@ version = "0.1.0"
 authors = ["Ticki <Ticki@users.noreply.github.com>"]
 
 [dependencies]
-hyper = "0.8.0"
-serde = "0.7.0"
-serde_json = "0.7.0"
-serde_macros = "0.7.2"
+hyper = "0.9.8"
+serde = "0.7.10"
+serde_json = "0.7.1"
+serde_macros = "0.7.10"
 
 [dependencies.url]
 git = "https://github.com/servo/rust-url"

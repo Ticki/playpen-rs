@@ -175,4 +175,15 @@ mod tests {
             .. Default::default()
         }).unwrap().rustc.len() > 50);
     }
+
+    #[test]
+    fn test_panic() {
+        assert!(eval("fn main() { panic!(\"yoyoyo\") }").unwrap().output.unwrap().contains("panicked"));
+        assert!(eval(Request {
+            code: "fn main() { panic!() }",
+            optimize: Optimize::O3,
+            version: Channel::Stable,
+            .. Default::default()
+        }).unwrap().output.unwrap().contains("panicked"));
+    }
 }
